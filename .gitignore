@@ -1,6 +1,8 @@
 api/tmp
 *.pyc
 
+.env
+
 # Editor directories and files
 .idea
 .vscode
