@@ -1,5 +1,6 @@
 import os
 import uuid
+from typing import List
 
 import uvicorn
 from fastapi import FastAPI
@@ -10,6 +11,7 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 
 from tools.make_as_scan import MakeAsScan
+from tools.merge_pdfs import merge_pdfs
 
 app = FastAPI()
 
@@ -55,6 +57,17 @@ class Scan(BaseModel):
 async def make_scan(scan: Scan):
     output_path = f'tmp/{uuid.uuid4()}.pdf'
     MakeAsScan(scan.path, output_path).process_file()
+    return output_path
+
+
+class MergeInput(BaseModel):
+    pdfs: List[str]
+
+
+@app.post("/merge/")
+async def merge(payload: MergeInput):
+    output_path = f'tmp/{uuid.uuid4()}.pdf'
+    merge_pdfs(payload.pdfs, output_path)
     return output_path
 
 
