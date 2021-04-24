@@ -9,14 +9,17 @@ from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 
-from tools.merge_pdf import MakeAsScan
+from tools.make_as_scan import MakeAsScan
 
 app = FastAPI()
 
 origins = [
     "http://localhost",
+    "http://127.0.0.1",
     "http://localhost:8080",
-    "http://localhost:8081"
+    "http://127.0.0.1:8080",
+    "http://46.101.193.74",
+    "http://46.101.193.74:8080"
 ]
 
 app.add_middleware(
