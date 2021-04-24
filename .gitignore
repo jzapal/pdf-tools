@@ -1,7 +1,7 @@
 api/tmp
 *.pyc
 
-.env
+ui/.env
 
 # Editor directories and files
 .idea
