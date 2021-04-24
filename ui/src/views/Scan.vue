@@ -2,7 +2,7 @@
   <file-upload :allow-multiple="false" v-on:fileUploaded="handleFileUploaded" />
   <button v-if="scanInProgress" disabled="disabled" class="btn btn-lg btn-primary">
     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-    <span class="sr-only">Pracuję...</span>
+    <span class="ml-1">Pracuję...</span>
   </button>
   <button v-else :disabled="!scanEnabled" class="btn btn-lg btn-primary" @click="scan">Skanuj</button>
 </template>
