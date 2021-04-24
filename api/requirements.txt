@@ -1,0 +1,8 @@
+aiofiles
+fastapi
+pydantic
+PyPDF2
+python-multipart
+uuid
+uvicorn
+wand
