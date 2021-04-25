@@ -1,5 +1,6 @@
 <template>
-  <file-upload :allow-multiple="true" v-on:fileUploaded="handleFileUploaded" />
+  <file-upload :allow-multiple="true" v-on:fileUploaded="handleFileUploaded"
+               v-on:fileRemoved="handleFileRemoved"/>
   <button v-if="mergeInProgress" disabled="disabled" class="btn btn-lg btn-primary">
     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     <span class="ml-1">Pracuję...</span>
@@ -15,19 +16,27 @@
         components: {FileUpload},
         data () {
             return {
-                filePath: '',
+                files: [],
                 mergeEnabled: false,
                 mergeInProgress: false
             }
         },
         methods: {
-            handleFileUploaded (filePath) {
+            handleFileUploaded (filePath, fileId) {
                 this.mergeEnabled = true
-                this.filePath = filePath
+                this.files.push({path: filePath, id: fileId})
+            },
+            handleFileRemoved (fileId) {
+                console.log(this.files, fileId)
+                this.files = this.files.filter(f => f.id !== fileId)
+                if (this.files.length === 0)
+                    this.mergeEnabled = false
             },
             merge () {
                 this.mergeInProgress = true
-                axios.post(`${process.env.VUE_APP_BACKEND_URL}/merge/`, {path: this.filePath}).then(response => {
+                var paths = []
+                this.files.forEach(f => paths.push(f.path))
+                axios.post(`${process.env.VUE_APP_BACKEND_URL}/merge/`, {pdfs: paths}).then(response => {
                     this.mergeInProgress = false
                     window.open(`${process.env.VUE_APP_BACKEND_URL}/${response.data}`)
                 }).catch(() => {

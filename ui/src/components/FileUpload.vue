@@ -11,6 +11,7 @@
                 v-bind:files="myFiles"
                 v-on:init="handleFilePondInit"
                 v-on:processfile="handleFileProcessed"
+                v-on:removefile="handleFileRemoved"
         />
     </div>
 </template>
@@ -67,7 +68,10 @@
                 // FilePond instance methods are available on `this.$refs.pond`
             },
             handleFileProcessed: function(e, t) {
-                this.$emit('fileUploaded', t.serverId.substr(1, t.serverId.length - 2));
+                this.$emit('fileUploaded', t.serverId.substr(1, t.serverId.length - 2), t.id);
+            },
+            handleFileRemoved: function(e, t) {
+                this.$emit('fileRemoved', t.id);
             }
         },
         components: {
