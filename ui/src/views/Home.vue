@@ -9,7 +9,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6 mt-2 mt-md-0">
+    <div class="col-sm-6 mt-4 mt-md-0">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Łączenie plików PDF</h4>

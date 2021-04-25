@@ -7,4 +7,8 @@
 </template>
 <style>
   @import './assets/bootstrap.min.css';
+  .spinner-border {
+    position: relative;
+    top: -3px;
+  }
 </style>

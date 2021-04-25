@@ -3,7 +3,7 @@
                v-on:fileRemoved="handleFileRemoved"/>
   <button v-if="mergeInProgress" disabled="disabled" class="btn btn-lg btn-primary">
     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-    <span class="ml-1">Pracuję...</span>
+    <span class="ml-1 mt-2">Pracuję...</span>
   </button>
   <button v-else :disabled="!mergeEnabled" class="btn btn-lg btn-primary" @click="merge">Połącz</button>
 </template>

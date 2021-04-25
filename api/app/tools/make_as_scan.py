@@ -42,6 +42,8 @@ class MakeAsScan(object):
         page.sharpen(radius=8, sigma=4)
         page.gamma(1.3)
         page.rotate(randint(-100, 100) / 200, background=Color('rgb(255, 255, 255)'))
+        # page.convert('png')
+        # page.compression_quality = 90
         file_like = io.BytesIO(page.make_blob())
         return file_like
 
