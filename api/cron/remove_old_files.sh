@@ -1,2 +1,2 @@
 #!/bin/bash
-find /path/to/files* -mtime +1 -exec rm {} \;
+find /srv/scan/pdf_tools -mtime +1 -exec rm {} \;
