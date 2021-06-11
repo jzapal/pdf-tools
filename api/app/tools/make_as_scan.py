@@ -1,6 +1,5 @@
 import io
 import random
-from argparse import ArgumentParser
 from random import randint
 from tempfile import NamedTemporaryFile
 
@@ -37,13 +36,12 @@ class MakeAsScan(object):
         f.close()
         if self.signatures and page_number in self.pages_with_signatures:
             page = self.add_signature(page)
-        # page.noise("multiplicative_gaussian", attenuate=-0.15)
+        page.noise("multiplicative_gaussian", attenuate=-0.15)
         page.despeckle()
         page.sharpen(radius=8, sigma=4)
         page.gamma(1.3)
         page.rotate(randint(-100, 100) / 200, background=Color('rgb(255, 255, 255)'))
-        # page.convert('png')
-        # page.compression_quality = 90
+        page.convert('RGB')
         file_like = io.BytesIO(page.make_blob())
         return file_like
 
