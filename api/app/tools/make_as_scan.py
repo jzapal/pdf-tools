@@ -36,7 +36,7 @@ class MakeAsScan(object):
         f.close()
         if self.signatures and page_number in self.pages_with_signatures:
             page = self.add_signature(page)
-        page.noise("multiplicative_gaussian", attenuate=-0.15)
+        # page.noise("multiplicative_gaussian", attenuate=-0.15)
         page.despeckle()
         page.sharpen(radius=8, sigma=4)
         page.gamma(1.3)
