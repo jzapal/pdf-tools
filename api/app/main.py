@@ -51,12 +51,19 @@ async def delete(request: Request):
 
 class Scan(BaseModel):
     path: str
+    pages: List[int]
+    signature: str
 
 
 @app.post("/scan/")
 async def make_scan(scan: Scan):
     output_path = f'tmp/{uuid.uuid4()}.pdf'
-    MakeAsScan(scan.path, output_path).process_file()
+    MakeAsScan(
+        scan.path,
+        output_path,
+        pages_with_signatures=scan.pages,
+        signatures=[scan.signature]
+    ).process_file()
     return output_path
 
 

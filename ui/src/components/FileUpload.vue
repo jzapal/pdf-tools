@@ -6,7 +6,7 @@
                 ref="pond"
                 label-idle="Upuść plik tutaj..."
                 :allow-multiple="allowMultiple"
-                accepted-file-types="application/pdf"
+                :accepted-file-types="acceptedFileTypes"
                 :server=server
                 v-bind:files="myFiles"
                 v-on:init="handleFilePondInit"
@@ -49,6 +49,10 @@
           allowMultiple: {
             type: Boolean,
             required: true
+          },
+          acceptedFileTypes: {
+             type: String,
+             default: "application/pdf"
           }
         },
         data: function () {

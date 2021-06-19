@@ -18,8 +18,7 @@ class MakeAsScan(object):
         self.input_file = input_file
         self.output_file = output_file
         if pages_with_signatures:
-            self.pages_with_signatures = [int(p) for p in
-                                          pages_with_signatures.split(',')]
+            self.pages_with_signatures = pages_with_signatures
         else:
             self.pages_with_signatures = []
 
@@ -54,7 +53,7 @@ class MakeAsScan(object):
 
     def add_signature(self, page):
         white = Color('#ffffff')
-        empty_lines_count = i = 0
+        empty_lines_count = 0
         not_white_seen = False
         signature = random.choice(self.signatures)
         for i, row in enumerate(page[20:-20]):
@@ -75,7 +74,6 @@ class MakeAsScan(object):
                 break
         else:
             i = page.height - signature.height - 50
-        print(i)
         page.composite(signature, left=page.width - signature.width - 100, top=i)
         return page
 
