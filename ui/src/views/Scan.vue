@@ -26,7 +26,7 @@
   </button>
   <button v-else :disabled="!scanEnabled" class="btn btn-lg btn-primary mt-4" @click="scan">Skanuj</button>
     <div v-if="errors" class="alert alert-danger mt-4" role="alert">
-        {{ errorText }}
+        {{ errorsText }}
     </div>
 </template>
 <script>
@@ -63,14 +63,18 @@ export default {
         if (this.addSignature) {
             data.signature = this.signaturePath
             let pages = this.pages.split(',')
+            console.log(pages)
             pages.forEach(p => {
-                try {
-                    parseInt(p)
-                } catch (e) {
+                console.log(parseInt(p))
+                if (!parseInt(p)) {
                     this.errors = true
                     this.errorsText = 'Wprowadź poprawną listę stron do dodania pieczątek'
+                    this.scanInProgress = false
                 }
             })
+            if (this.errors) {
+                return
+            }
             data.pages = pages
         }
         axios.post(`${process.env.VUE_APP_BACKEND_URL}/scan/`, data).then(response => {
